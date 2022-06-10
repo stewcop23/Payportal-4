@@ -1,0 +1,6 @@
+jerry1024
+password
+CH
+jerry,jerry@jery.com,1
+1
+D,7725095274016858,3,2032,208,0

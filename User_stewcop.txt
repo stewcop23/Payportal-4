@@ -1,0 +1,6 @@
+stewcop
+open
+CH
+stew,stew@stew,11111
+1
+D,3507545640309148,12,2028,38,0

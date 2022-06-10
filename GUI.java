@@ -2,6 +2,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.util.Scanner;
 
 public class GUI {
     static boolean loggedin = false;
@@ -15,9 +16,12 @@ public class GUI {
         double height = size.getHeight();
 
         JButton loginButton = new JButton("Click to login");
+        JButton registerButton = new JButton("Click to register");
+
         int bttnwdth = 1000;
         int bttnhgt = 500;
-        loginButton.setBounds((int) width / 2 - (bttnwdth / 2), (int) height / 2 - (bttnhgt / 2), bttnwdth, bttnhgt);
+        loginButton.setBounds((int) width / 2 - (bttnwdth / 2), (int) height / 2 - (bttnhgt / 2), bttnwdth / 2,
+                bttnhgt);
         loginButton.setFont(new Font("Arial", Font.BOLD, 40));
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -26,7 +30,66 @@ public class GUI {
             }
 
         });
+        registerButton.setBounds((int) width / 2, (int) height / 2 - (bttnhgt / 2), bttnwdth / 2,
+                bttnhgt);
+        registerButton.setFont(new Font("Arial", Font.BOLD, 40));
+        registerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFrame register = new JFrame();
+                register.setSize(500, 1000);
+                register.setVisible(true);
+                register.setLayout(null);
+                JLabel username = new JLabel("Username");
+                JLabel password = new JLabel("Password");
+                JLabel name = new JLabel("Name");
+                JLabel email = new JLabel("Email");
+                JLabel phoneNumber = new JLabel("Phone Number");
+                JTextField usernameField = new JTextField();
+                JTextField passwordField = new JTextField();
+                JTextField nameField = new JTextField();
+                JTextField emailField = new JTextField();
+                JTextField phoneNumberField = new JTextField();
+                JButton registerButton = new JButton("Register");
+                username.setBounds(0, 10, 100, 50);
+                usernameField.setBounds(0, 60, 100, 50);
+                password.setBounds(0, 110, 100, 50);
+                passwordField.setBounds(0, 160, 100, 50);
+                name.setBounds(0, 210, 100, 50);
+                nameField.setBounds(0, 260, 100, 50);
+                email.setBounds(0, 310, 100, 50);
+                emailField.setBounds(0, 360, 100, 50);
+                phoneNumber.setBounds(0, 410, 100, 50);
+                phoneNumberField.setBounds(0, 460, 100, 50);
+                registerButton.setBounds(0, 510, 100, 50);
+                register.add(username);
+                register.add(usernameField);
+                register.add(password);
+                register.add(passwordField);
+                register.add(name);
+                register.add(nameField);
+                register.add(email);
+                register.add(emailField);
+                register.add(phoneNumber);
+                register.add(phoneNumberField);
+                register.add(registerButton);
+                registerButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        String username = usernameField.getText();
+                        String password = passwordField.getText();
+                        String name = nameField.getText();
+                        String email = emailField.getText();
+                        String phoneNumber = phoneNumberField.getText();
+                        CardHolder newUser = new CardHolder(username, password, name, email, phoneNumber,new Scanner(System.in),true);
+                        mainGUI(newUser);
+                        register.setVisible(false);
 
+
+
+            }
+
+        });}});
+        frame.add(registerButton);
+    
         frame.add(loginButton);
 
         frame.setSize(size);
@@ -236,11 +299,12 @@ public class GUI {
                 button.setBounds(0, i * 100 + 200, 500, 100);
                 frame.add(button);
 
-                frame.setSize(size);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setLayout(null);
-                frame.setVisible(true);
+
             }
+            frame.setSize(size);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLayout(null);
+            frame.setVisible(true);
         }
     }
 }

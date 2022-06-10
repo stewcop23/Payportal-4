@@ -14,8 +14,8 @@ public class Main {
          */
         ArrayList<User> users = getUsers();
 
-        // GUI.main(args);
-        GUI.mainGUI(users.get(1));
+        GUI.main(args);
+        //GUI.mainGUI(users.get(1));
         // System.out.println(((CardHolder)users.get(1)).getCards().get(1).getCardNumber());
     }
 
