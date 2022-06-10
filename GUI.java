@@ -7,9 +7,8 @@ public class GUI {
     static boolean loggedin = false;
     static JFrame frame = new JFrame("GUI");
 
-
     public static void main(String[] args) {
-        
+
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
         double width = size.getWidth();
@@ -40,9 +39,9 @@ public class GUI {
         System.out.println(loggedin);
         frame.setVisible(false);
         User on = null;
-        
-        for(User user:User.getUserArray()){
-            if (user.islogged()){
+
+        for (User user : User.getUserArray()) {
+            if (user.islogged()) {
                 on = user;
             }
         }
@@ -111,14 +110,137 @@ public class GUI {
     public static void mainGUI(User user) {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         JFrame frame = new JFrame(user.getUsername());
-JLabel label = new JLabel(user.toString());
-label.setBounds(10, 0, 1000, 50);
-frame.add(label);
+        JButton restart = new JButton("Restart");
+        restart.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent a) {
+                frame.setVisible(false);
+                mainGUI(user);
+            }
+        });
+        restart.setBounds(1000, 0, 100, 50);
+        frame.add(restart);
+        if (user.type().equals("CH")) {
+            JLabel label = new JLabel("<html> Username: " + user.getUsername() + "<br/> Name: "
+                    + ((CardHolder) user).getName() + "<br/> Email: " + ((CardHolder) user).getEmail()
+                    + "<br/> Phone number: " + ((CardHolder) user).getPhoneNumber() + "</html>");
+            label.setBounds(10, 0, 1000, 100);
+            frame.add(label);
 
+            JButton adddebit = new JButton("Create new debit card");
 
-        frame.setSize(size);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(null);
-        frame.setVisible(true);
+            adddebit.setBounds(0, 100, 250, 100);
+            adddebit.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent a) {
+                    Debit newc = new Debit();
+                    ((CardHolder) user).createCard(newc);
+                    ((CardHolder) user).addCard(newc);
+                    frame.setVisible(false);
+                    mainGUI(user);
+                }
+            });
+            frame.add(adddebit);
+            JButton addvisa = new JButton("Create new visa card");
+            addvisa.setBounds(250, 100, 250, 100);
+            addvisa.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent a) {
+                    ((CardHolder) user).createCard((new Visa()));
+                    frame.setVisible(false);
+                    mainGUI(user);
+                }
+            });
+            frame.add(addvisa);
+
+            JLabel info = new JLabel("Welcome to your account");
+
+            info.setBounds(600, 20, 300, 200);
+            frame.add(info);
+            frame.revalidate();
+            JButton deposit = new JButton("Deposit");
+            deposit.setBounds(600, 220, 250, 100);
+            deposit.setVisible(false);
+            frame.add(deposit);
+            JButton withdraw = new JButton("Withdraw");
+            withdraw.setBounds(850, 220, 250, 100);
+            withdraw.setVisible(false);
+            frame.add(withdraw);
+
+            for (int i = 0; i < ((CardHolder) user).getCards().size(); i++) {
+                Card card = ((CardHolder) user).getCards().get(i);
+                String type = (card.toString().split(",")[0].equals("V") ? "Visa" : "Debit");
+                JButton button = new JButton(type + ", Number: " + card.toString().split(",")[1] + ", "
+                        + (card.toString().split(",")[0].equals("V") ? "Debt: " : "Ballance: ")
+                        + card.toString().split(",")[5]);
+                button.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent a) {
+                        info.setText("<html>Type: " + type + "<br/>" + "Number: " + card.toString().split(",")[1]
+                                + "<br/>" + "Expiration: " + card.toString().split(",")[2] + "/"
+                                + card.toString().split(",")[3] + "<br/>" + "CVV: " + card.toString().split(",")[4]
+                                + "<br/>" + (card.toString().split(",")[0].equals("V") ? "Debt: " : "Ballance: ")
+                                + card.toString().split(",")[5] + "</html>");
+                        // System.out.println(info.getText());
+
+                        deposit.setVisible(true);
+                        deposit.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent a) {
+                                JFrame depositbox = new JFrame("Deposit");
+                                JLabel amountLbl = new JLabel("Amount:");
+                                amountLbl.setBounds(0, 0, 1000, 50);
+                                JTextField amountField = new JTextField();
+                                amountField.setBounds(0, 50, 200, 50);
+                                JButton submit = new JButton("Submit");
+                                submit.setBounds(0, 100, 150, 75);
+                                submit.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent a) {
+                                        if (card.toString().split(",")[0].equals("V")) {
+                                            ((Visa) card).paydebt(Double.parseDouble(amountField.getText()));
+                                        } else {
+                                            ((Debit) card).deposit(Double.parseDouble(amountField.getText()));
+                                        }
+                                        depositbox.setVisible(false);
+
+                                    }
+                                });
+                                depositbox.add(amountField);
+                                depositbox.add(amountLbl);
+                                depositbox.add(submit);
+                                depositbox.setSize(1000, 1000);
+                                depositbox.setLayout(null);
+                                depositbox.setVisible(true);
+                            }
+                        });
+                        withdraw.setVisible(true);
+                        withdraw.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent a) {
+                                JFrame withdrawbox = new JFrame("Withdraw");
+                                JLabel amountLbl = new JLabel("Amount:");
+                                amountLbl.setBounds(0, 0, 1000, 50);
+                                JTextField amountField = new JTextField();
+                                amountField.setBounds(0, 50, 200, 50);
+                                JButton submit = new JButton("Submit");
+                                submit.setBounds(0, 100, 150, 75);
+                                submit.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent a) {
+                                        if (card.toString().split(",")[0].equals("V")) {
+                                            ((Visa) card).indebted(Double.parseDouble(amountField.getText()));
+                                        } else {
+                                            ((Debit) card).deposit(-Double.parseDouble(amountField.getText()));
+                                        }
+                                        withdrawbox.setVisible(false);
+
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+                button.setBounds(0, i * 100 + 200, 500, 100);
+                frame.add(button);
+
+                frame.setSize(size);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setLayout(null);
+                frame.setVisible(true);
+            }
+        }
     }
 }

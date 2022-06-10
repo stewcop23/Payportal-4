@@ -13,11 +13,11 @@ public class Visa extends Card {
     public int getdebt() {
         return debt;
     }
-    public void indebted(int amount) {
+    public void indebted(Double amount) {
         debt += amount;
     }
 
-    public void paydebt(int amount) {
+    public void paydebt(Double amount) {
         debt -= amount;
     }
     public String toString(){

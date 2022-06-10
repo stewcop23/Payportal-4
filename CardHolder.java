@@ -71,7 +71,7 @@ public class CardHolder extends User {
 
             update.write(count + "\n");
             update.write(card.toString() + "\n");
-                    news.nextLine();
+            news.nextLine();
             while (news.hasNextLine()) {
                 update.write(news.nextLine() + "\n");
             }
@@ -80,16 +80,19 @@ public class CardHolder extends User {
             // cards.add(card);
 
             old.close();
+            news.close();
             newf.delete();
 
         } catch (Exception e) {
             System.out.println("ERROR" + e);
         }
     }
-    public void addCard(Card card){
+
+    public void addCard(Card card) {
         cards.add(card);
     }
-    public ArrayList<Card> getCards(){
+
+    public ArrayList<Card> getCards() {
         return cards;
     }
 

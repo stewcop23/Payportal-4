@@ -25,4 +25,7 @@ public class Debit extends Card {
     public int getBallance() {
         return ballance;
     }
+    public void deposit(Double amount) {
+        ballance += amount.intValue();
+    }
 }
