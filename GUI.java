@@ -79,17 +79,22 @@ public class GUI {
                         String name = nameField.getText();
                         String email = emailField.getText();
                         String phoneNumber = phoneNumberField.getText();
-                        CardHolder newUser = new CardHolder(username, password, name, email, phoneNumber,new Scanner(System.in),true);
-                        mainGUI(newUser);
+                        CardHolder newUser = new CardHolder(username, password, name, email, phoneNumber,
+                                new Scanner(System.in), true);
+                                newUser.setLogged(true);
+                        loggedin = true;
+
+//                        mainGUI(newUser);
+
                         register.setVisible(false);
 
+                    }
 
-
+                });
             }
-
-        });}});
+        });
         frame.add(registerButton);
-    
+
         frame.add(loginButton);
 
         frame.setSize(size);
@@ -231,14 +236,14 @@ public class GUI {
                 Card card = ((CardHolder) user).getCards().get(i);
                 String type = (card.toString().split(",")[0].equals("V") ? "Visa" : "Debit");
                 JButton button = new JButton(type + ", Number: " + card.toString().split(",")[1] + ", "
-                        + (card.toString().split(",")[0].equals("V") ? "Debt: " : "Ballance: ")
+                        + (card.toString().split(",")[0].equals("V") ? "Debt: $" : "Ballance: $")
                         + card.toString().split(",")[5]);
                 button.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent a) {
                         info.setText("<html>Type: " + type + "<br/>" + "Number: " + card.toString().split(",")[1]
                                 + "<br/>" + "Expiration: " + card.toString().split(",")[2] + "/"
                                 + card.toString().split(",")[3] + "<br/>" + "CVV: " + card.toString().split(",")[4]
-                                + "<br/>" + (card.toString().split(",")[0].equals("V") ? "Debt: " : "Ballance: ")
+                                + "<br/>" + (card.toString().split(",")[0].equals("V") ? "Debt: $" : "Ballance: $")
                                 + card.toString().split(",")[5] + "</html>");
                         // System.out.println(info.getText());
 
@@ -291,14 +296,21 @@ public class GUI {
                                         withdrawbox.setVisible(false);
 
                                     }
+
                                 });
+                                withdrawbox.add(amountField);
+                                withdrawbox.add(amountLbl);
+                                withdrawbox.add(submit);
+                                withdrawbox.setSize(1000, 1000);
+                                withdrawbox.setLayout(null);
+
+                                withdrawbox.setVisible(true);
                             }
                         });
                     }
                 });
                 button.setBounds(0, i * 100 + 200, 500, 100);
                 frame.add(button);
-
 
             }
             frame.setSize(size);
