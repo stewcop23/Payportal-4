@@ -148,19 +148,19 @@ public class User {
      * @param user
      * @param info
      */
-    public void updateFile(File file, User user, String info) {
-        updateFile(file, user, info, true);
+    public void updateFile(User user, String info) {
+        updateFile(user, info, true);
     }
 
     
     /** 
-     * adds the info to the file, if newline is true, it will add a newline to the end of the info
-     * @param file
-     * @param user
+     * adds the info to the file, 
+
+     * @param user user that is being updated
      * @param info
-     * @param newline
+     * @param newline if true, it will add a newline to the end of the info
      */
-    public void updateFile(File file, User user, String info, boolean newline) {
+    public void updateFile(User user, String info, boolean newline) {
         File data = new File("User_" + user.getUsername() + ".txt");
         try (FileWriter write = new FileWriter(data, true)) {
 

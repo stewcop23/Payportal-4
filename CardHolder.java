@@ -17,10 +17,9 @@ public class CardHolder extends User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         if (cfile) {
-            File data = new File("User_" + this.getUsername() + ".txt");
-            updateFile(data, this, "CH");
-            updateFile(data, this, name + "," + email + "," + phoneNumber);
-            updateFile(data, this, "0");
+            updateFile(this, "CH");
+            updateFile(this, name + "," + email + "," + phoneNumber);
+            updateFile(this, "0");
         }
     }
 
@@ -43,15 +42,15 @@ public class CardHolder extends User {
 
     
     /** 
-     * @param name
+     * @param name new name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     
-    /** 
-     * @return String
+    /**
+     * @return String 
      */
     public String getEmail() {
         return this.email;
@@ -84,7 +83,7 @@ public class CardHolder extends User {
     
     /** 
      * Does not create the card, rather it adds it to the list of cards and to the users file
-     * @param card
+     * @param card should be either a Debit or Visa card
      */
     public void createCard(Card card) {
         try {
