@@ -13,6 +13,11 @@ public class Admin extends User {
         updateFile(data, this, "Admin");
         }
     }
+    
+    /** 
+     * returns the type of the user
+     * @return String
+     */
     public String type(){
         return "Admin";
     }

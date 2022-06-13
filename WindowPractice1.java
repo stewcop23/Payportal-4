@@ -6,6 +6,10 @@ public class WindowPractice1 {
     public WindowPractice1(){
         
     }
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame("GUI");
 

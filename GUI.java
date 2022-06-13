@@ -8,6 +8,11 @@ public class GUI {
     static boolean loggedin = false;
     static JFrame frame = new JFrame("GUI");
 
+    
+    /** 
+     * Shows the first screen of the program. and allows the user to login or create an account.
+     * @param args
+     */
     public static void main(String[] args) {
 
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -154,6 +159,11 @@ public class GUI {
         loginbox.setVisible(true);
     }
 
+    
+    /** 
+     * Displays an error message to the user.
+     * @param msg
+     */
     public static void errorMsg(String msg) {
         JFrame err = new JFrame("Error: " + msg);
         int bxh = 700;
@@ -175,6 +185,11 @@ public class GUI {
         err.setVisible(true);
     }
 
+    
+    /** 
+     * Main method for displaying the GUI after a user has been created or logged into
+     * @param user
+     */
     public static void mainGUI(User user) {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         JFrame frame = new JFrame(user.getUsername());

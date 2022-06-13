@@ -24,34 +24,68 @@ public class CardHolder extends User {
         }
     }
 
+    
+    /** 
+     * Return the type of the user (in this case CardHolder)
+     * @return String
+     */
     public String type() {
         return "CH";
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName() {
         return this.name;
     }
 
+    
+    /** 
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getEmail() {
         return this.email;
     }
 
+    
+    /** 
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
 
+    
+    /** 
+     * @param phoneNumber
+     */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    
+    /** 
+     * Does not create the card, rather it adds it to the list of cards and to the users file
+     * @param card
+     */
     public void createCard(Card card) {
         try {
             File orig = new File("User_" + this.getUsername() + ".txt");
@@ -88,10 +122,20 @@ public class CardHolder extends User {
         }
     }
 
+    
+    /** 
+     * adds a card to the users cards arraylist
+     * @param card
+     */
     public void addCard(Card card) {
         cards.add(card);
     }
 
+    
+    /** 
+     * returns the users cards array
+     * @return ArrayList<Card>
+     */
     public ArrayList<Card> getCards() {
         return cards;
     }

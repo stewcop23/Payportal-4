@@ -7,6 +7,10 @@ public class GUItest {
     public GUItest() {
     }
 
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
 
         JFrame frame = new JFrame("GUI");

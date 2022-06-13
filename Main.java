@@ -4,6 +4,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
+    
+    /** 
+     * @param args
+     */
     // private static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -19,6 +23,11 @@ public class Main {
         // System.out.println(((CardHolder)users.get(1)).getCards().get(1).getCardNumber());
     }
 
+    
+    /** 
+     * returns all of the previously created users (looks for users.txt in root directory)
+     * @return ArrayList<User>
+     */
     public static ArrayList<User> getUsers() {
         try {
             FileReader read = new FileReader("users.txt");
