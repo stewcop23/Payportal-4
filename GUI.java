@@ -289,7 +289,7 @@ public class GUI {
                                 submit.addActionListener(new ActionListener() {
                                     public void actionPerformed(ActionEvent a) {
                                         if (card.toString().split(",")[0].equals("V")) {
-                                            ((Visa) card).indebted(Double.parseDouble(amountField.getText()));
+                                            ((Visa) card).charge(Double.parseDouble(amountField.getText()));
                                         } else {
                                             ((Debit) card).deposit(-Double.parseDouble(amountField.getText()));
                                         }

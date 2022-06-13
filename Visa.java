@@ -13,7 +13,7 @@ public class Visa extends Card {
     public int getdebt() {
         return debt;
     }
-    public void indebted(Double amount) {
+    public void charge(Double amount) {
         debt += amount;
     }
 
